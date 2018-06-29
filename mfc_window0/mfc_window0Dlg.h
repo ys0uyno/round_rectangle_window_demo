@@ -29,4 +29,16 @@ protected:
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
+
+public:
+	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+
+public:
+	Gdiplus::Image *m_pgdi_image;
+	HDC m_memory_hdc;
+	int m_image_width;
+	int m_image_height;
+	BLENDFUNCTION m_blend;
+	afx_msg void OnDestroy();
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 };

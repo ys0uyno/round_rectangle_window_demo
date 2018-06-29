@@ -5,6 +5,7 @@
 #include "stdafx.h"
 #include "mfc_window0.h"
 #include "mfc_window0Dlg.h"
+#include <GdiPlus.h>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -51,6 +52,8 @@ BOOL Cmfc_window0App::InitInstance()
 
 	CWinApp::InitInstance();
 
+	Gdiplus::GdiplusStartupInput m_gdi_startup;
+	Gdiplus::GdiplusStartup(&m_gdi_token, &m_gdi_startup, NULL);
 
 	AfxEnableControlContainer();
 
@@ -90,5 +93,12 @@ BOOL Cmfc_window0App::InitInstance()
 	// Since the dialog has been closed, return FALSE so that we exit the
 	//  application, rather than start the application's message pump.
 	return FALSE;
+}
+
+int Cmfc_window0App::ExitInstance()
+{
+	Gdiplus::GdiplusShutdown(m_gdi_token);
+
+	return CWinApp::ExitInstance();
 }
 
