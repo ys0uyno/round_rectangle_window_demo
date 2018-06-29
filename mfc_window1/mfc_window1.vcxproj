@@ -99,6 +99,8 @@
     <None Include="res\mfc_window1.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="dlg_child.h" />
+    <ClInclude Include="dlg_parent.h" />
     <ClInclude Include="mfc_window1.h" />
     <ClInclude Include="mfc_window1Dlg.h" />
     <ClInclude Include="Resource.h" />
@@ -106,6 +108,8 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="dlg_child.cpp" />
+    <ClCompile Include="dlg_parent.cpp" />
     <ClCompile Include="mfc_window1.cpp" />
     <ClCompile Include="mfc_window1Dlg.cpp" />
     <ClCompile Include="stdafx.cpp">
