@@ -63,6 +63,12 @@ BEGIN_MESSAGE_MAP(Cmfc_window1Dlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_WM_CTLCOLOR()
+	ON_WM_MOVE()
+	ON_WM_ERASEBKGND()
+	ON_WM_LBUTTONDOWN()
+	ON_WM_CREATE()
+	ON_WM_DESTROY()
 END_MESSAGE_MAP()
 
 
@@ -151,3 +157,87 @@ HCURSOR Cmfc_window1Dlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+
+
+HBRUSH Cmfc_window1Dlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
+{
+	HBRUSH hbr = CDialogEx::OnCtlColor(pDC, pWnd, nCtlColor);
+
+	// TODO:  Change any attributes of the DC here
+	if (nCtlColor == CTLCOLOR_DLG)
+	{
+		return m_brush;
+	}
+
+	// TODO:  Return a different brush if the default is not desired
+	return hbr;
+}
+
+
+void Cmfc_window1Dlg::OnMove(int x, int y)
+{
+	CDialogEx::OnMove(x, y);
+
+	// TODO: Add your message handler code here
+}
+
+
+BOOL Cmfc_window1Dlg::OnEraseBkgnd(CDC* pDC)
+{
+	// TODO: Add your message handler code here and/or call default
+
+	return TRUE/*CDialogEx::OnEraseBkgnd(pDC)*/;
+}
+
+
+void Cmfc_window1Dlg::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: Add your message handler code here and/or call default
+	::SendMessage(parentDlg->GetSafeHwnd(), WM_SYSCOMMAND, SC_MOVE + HTCAPTION, 0);
+
+	CDialogEx::OnLButtonDown(nFlags, point);
+}
+
+
+int Cmfc_window1Dlg::OnCreate(LPCREATESTRUCT lpCreateStruct)
+{
+	if (CDialogEx::OnCreate(lpCreateStruct) == -1)
+		return -1;
+
+	// TODO:  Add your specialized creation code here
+	CDC *pDC = GetDC();
+	m_pMemDC = new CDC();
+	m_pBitmap = new CBitmap();
+	m_nScreenX = 556;
+	m_nScreenY = 397;
+	m_pMemDC->CreateCompatibleDC(pDC);
+	m_pBitmap->CreateCompatibleBitmap(pDC, m_nScreenX, m_nScreenY);
+	CBitmap* oldBitmap = m_pMemDC->SelectObject(m_pBitmap);
+	CBrush brush(RGB(255, 255, 255));
+	CRect rect;
+	GetClientRect(&rect);
+	m_pMemDC->FillRect(CRect(rect.left, rect.top, m_nScreenX, m_nScreenY), &brush);
+	m_pMemDC->SelectObject(oldBitmap);
+	ReleaseDC(pDC);
+
+	return 0;
+}
+
+
+void Cmfc_window1Dlg::OnDestroy()
+{
+	CDialogEx::OnDestroy();
+
+	// TODO: Add your message handler code here
+	if (m_pMemDC)
+	{
+		delete m_pMemDC;
+		m_pMemDC = NULL;
+	}
+
+	if (m_pBitmap)
+	{
+		delete m_pBitmap;
+		m_pBitmap = NULL;
+	}
+}

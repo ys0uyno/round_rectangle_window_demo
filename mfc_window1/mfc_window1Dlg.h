@@ -29,4 +29,23 @@ protected:
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
+
+public:
+	void SetParentDlg(CWnd *dlg){ parentDlg = dlg; }
+
+private:
+	CWnd *parentDlg;
+	CBrush m_brush;
+	CDC *m_pMemDC;
+	CBitmap *m_pBitmap;
+	int m_nScreenX;
+	int m_nScreenY;
+
+public:
+	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
+	afx_msg void OnMove(int x, int y);
+	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+	afx_msg void OnDestroy();
 };
