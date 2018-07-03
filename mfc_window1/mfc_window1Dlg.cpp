@@ -104,6 +104,13 @@ BOOL Cmfc_window1Dlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
 	// TODO: Add extra initialization here
+	COLORREF transColor = RGB(0, 255, 0);
+	m_brush.CreateSolidBrush(transColor);
+
+	DWORD dwExStyle = ::GetWindowLong(m_hWnd, GWL_STYLE);
+	::SetWindowLong(m_hWnd, GWL_STYLE, dwExStyle | 0x80000);
+
+	::SetLayeredWindowAttributes(m_hWnd, transColor, 0, 1);
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -146,6 +153,13 @@ void Cmfc_window1Dlg::OnPaint()
 	}
 	else
 	{
+		CDC *pDC = GetDC();
+		CRect rect;
+		GetClientRect(rect);
+		CBitmap* oldBitmap = m_pMemDC->SelectObject(m_pBitmap);
+		pDC->BitBlt(rect.left, rect.top, m_nScreenX, m_nScreenY, m_pMemDC, rect.left, rect.top, SRCCOPY);
+		m_pMemDC->SelectObject(oldBitmap);
+
 		CDialogEx::OnPaint();
 	}
 }
@@ -212,7 +226,7 @@ int Cmfc_window1Dlg::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	m_nScreenY = 397;
 	m_pMemDC->CreateCompatibleDC(pDC);
 	m_pBitmap->CreateCompatibleBitmap(pDC, m_nScreenX, m_nScreenY);
-	CBitmap* oldBitmap = m_pMemDC->SelectObject(m_pBitmap);
+	CBitmap *oldBitmap = m_pMemDC->SelectObject(m_pBitmap);
 	CBrush brush(RGB(255, 255, 255));
 	CRect rect;
 	GetClientRect(&rect);

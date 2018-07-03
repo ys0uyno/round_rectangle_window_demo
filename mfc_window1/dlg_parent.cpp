@@ -13,6 +13,8 @@ IMPLEMENT_DYNAMIC(dlg_parent, CDialogEx)
 
 dlg_parent::dlg_parent(CWnd* pParent /*=NULL*/)
 	: CDialogEx(dlg_parent::IDD, pParent)
+	, m_pMainDlg(NULL)
+	, m_pImage(NULL)
 {
 
 }
@@ -115,6 +117,7 @@ BEGIN_MESSAGE_MAP(dlg_parent, CDialogEx)
 	ON_WM_LBUTTONDOWN()
 	ON_WM_CREATE()
 	ON_WM_DESTROY()
+	ON_MESSAGE(WM_DISPLAYCHANGE, OnDisplayChange)
 END_MESSAGE_MAP()
 
 

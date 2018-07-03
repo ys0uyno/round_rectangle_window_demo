@@ -20,12 +20,12 @@ BOOL gdi_image_render::SetImage(UINT nID, LPCTSTR sTR)
 	return TRUE;
 }
 
-void gdi_image_render::Render(HDC hdc, Gdiplus::PointF pt, const Gdiplus::ImageAttributes *attr /*= NULL*/)
+void gdi_image_render::Render(HDC hdc, Gdiplus::Point pt, const Gdiplus::ImageAttributes *attr /*= NULL*/)
 {
 	DrawImg(m_pImage, hdc, pt, attr);
 }
 
-void gdi_image_render::DrawImg(Gdiplus::Image *pImg, HDC hdc, Gdiplus::PointF pt, const Gdiplus::ImageAttributes *attr /*= NULL*/)
+void gdi_image_render::DrawImg(Gdiplus::Image *pImg, HDC hdc, Gdiplus::Point pt, const Gdiplus::ImageAttributes *attr /*= NULL*/)
 {
 	Gdiplus::Graphics graph(hdc);
 	if (pImg)

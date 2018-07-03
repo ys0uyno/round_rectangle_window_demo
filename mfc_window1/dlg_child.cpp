@@ -40,6 +40,7 @@ BEGIN_MESSAGE_MAP(dlg_child, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_LBUTTONDOWN()
 	ON_WM_DESTROY()
+	ON_WM_ERASEBKGND()
 END_MESSAGE_MAP()
 
 
@@ -47,7 +48,7 @@ END_MESSAGE_MAP()
 
 void dlg_child::DrawSomething()
 {
-	m_BK.Render(m_pMemDC->GetSafeHdc(), Gdiplus::PointF(0, 0));
+	m_BK.Render(m_pMemDC->GetSafeHdc(), Gdiplus::Point(0, 0));
 }
 
 
@@ -150,4 +151,12 @@ void dlg_child::OnDestroy()
 		delete m_pBitmap;
 		m_pBitmap = NULL;
 	}
+}
+
+
+BOOL dlg_child::OnEraseBkgnd(CDC* pDC)
+{
+	// TODO: Add your message handler code here and/or call default
+
+	return TRUE/*CDialogEx::OnEraseBkgnd(pDC)*/;
 }
