@@ -5,6 +5,7 @@
 #include "stdafx.h"
 #include "mfc_window1.h"
 #include "mfc_window1Dlg.h"
+#include "dlg_parent.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -69,7 +70,8 @@ BOOL Cmfc_window1App::InitInstance()
 	// such as the name of your company or organization
 	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
 
-	Cmfc_window1Dlg dlg;
+	/*Cmfc_window1Dlg dlg;*/
+	dlg_parent dlg;
 	m_pMainWnd = &dlg;
 	INT_PTR nResponse = dlg.DoModal();
 	if (nResponse == IDOK)
