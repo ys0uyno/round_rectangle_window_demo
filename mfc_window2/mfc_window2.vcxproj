@@ -95,23 +95,30 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
+    <None Include="res\bk.png" />
     <None Include="res\mfc_window2.ico" />
     <None Include="res\mfc_window2.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="dlg_test0.h" />
+    <ClInclude Include="gdi_image_render.h" />
     <ClInclude Include="mfc_window2.h" />
     <ClInclude Include="mfc_window2Dlg.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="util.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="dlg_test0.cpp" />
+    <ClCompile Include="gdi_image_render.cpp" />
     <ClCompile Include="mfc_window2.cpp" />
     <ClCompile Include="mfc_window2Dlg.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="mfc_window2.rc" />
@@ -119,4 +126,9 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="mfc_window2.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

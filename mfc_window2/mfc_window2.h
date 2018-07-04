@@ -23,10 +23,14 @@ public:
 // Overrides
 public:
 	virtual BOOL InitInstance();
+	virtual int ExitInstance();
 
 // Implementation
 
 	DECLARE_MESSAGE_MAP()
+
+public:
+	ULONG_PTR m_pGdiToken;
 };
 
 extern Cmfc_window2App theApp;
